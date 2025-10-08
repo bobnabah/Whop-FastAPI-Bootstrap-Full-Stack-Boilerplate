@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cerebra - Payment Successful</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .success-hero {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 80px 0;
+        }
+        .success-card {
+            border: none;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confetti-fall 3s linear infinite;
+        }
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        .feature-highlight {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+    </style>
+  </head>
+<body>
+    <!-- Confetti Animation -->
+    <div class="confetti" id="confetti"></div>
+
+    <!-- Success Hero Section -->
+    <section class="success-hero">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <div class="success-icon">
+                        <i class="fas fa-check fa-2x text-white"></i>
+                    </div>
+                    <h1 class="display-4 fw-bold mb-4">Welcome to Premium!</h1>
+                    <p class="lead mb-0">Your premium access is now active. Enjoy all the exclusive features and content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Details -->
+    <section class="py-5">
+        <div class="container">
+      <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card success-card">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <h3 class="card-title text-success">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    Transaction Completed
+                                </h3>
+                            </div>
+                            
+                            <!-- Receipt Details -->
+                            <div id="receipt-details" class="row mb-4">
+                                <div class="col-12 text-center mb-3">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading receipt...</span>
+                                    </div>
+                                    <p class="mt-2 text-muted">Loading your receipt details...</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Download Invoice Button -->
+                            <div class="text-center mb-4" id="invoice-section" style="display: none;">
+                                <button class="btn btn-outline-primary btn-lg" onclick="downloadInvoice()">
+                                    <i class="fas fa-download me-2"></i>Download Invoice PDF
+                                </button>
+                            </div>
+                            
+                            <div class="feature-highlight">
+                                <h5 class="text-center mb-3">
+                                    <i class="fas fa-star text-warning me-2"></i>
+                                    What's Next?
+                                </h5>
+                                <div class="row text-center">
+                                    <div class="col-md-4 mb-3">
+                                        <i class="fas fa-rocket fa-2x text-primary mb-2"></i>
+                                        <h6>AI Enhancement Ready</h6>
+                                        <small class="text-muted">Your cognitive tools are now active</small>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <i class="fas fa-envelope fa-2x text-info mb-2"></i>
+                                        <h6>Welcome Email</h6>
+                                        <small class="text-muted">Check your email for setup instructions</small>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <i class="fas fa-headset fa-2x text-success mb-2"></i>
+                                        <h6>Support Available</h6>
+                                        <small class="text-muted">24/7 customer support</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center mt-4">
+                                <a href="/" class="btn btn-primary btn-lg me-3">
+                                    <i class="fas fa-home me-2"></i>Back to Home
+                                </a>
+                                <a href="/admin" class="btn btn-outline-secondary btn-lg">
+                                    <i class="fas fa-chart-bar me-2"></i>View Dashboard
+                                </a>
+                            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-4 mb-4">
+                    <div class="p-4">
+                        <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                        <h4>Secure & Protected</h4>
+                        <p class="text-muted">Your payment was processed securely with industry-standard encryption.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="p-4">
+                        <i class="fas fa-clock fa-3x text-success mb-3"></i>
+                        <h4>AI-Powered Activation</h4>
+                        <p class="text-muted">Your cognitive enhancement tools are now active and ready to optimize your mental performance.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="p-4">
+                        <i class="fas fa-headset fa-3x text-info mb-3"></i>
+                        <h4>24/7 Support</h4>
+                        <p class="text-muted">Need help? Our support team is available around the clock.</p>
+                    </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 Your Company. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="/admin" class="text-white-50 me-3">Admin</a>
+                    <a href="#" class="text-white-50">Support</a>
+        </div>
+      </div>
+    </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Create confetti animation
+        function createConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-piece';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confettiContainer.appendChild(confetti);
+            }
+            
+            // Remove confetti after animation
+            setTimeout(() => {
+                confettiContainer.innerHTML = '';
+            }, 5000);
+        }
+        
+        // Load receipt data
+        async function loadReceiptData() {
+            try {
+                // Get the most recent completed transaction
+                const response = await fetch('/api/transactions/');
+                const transactions = await response.json();
+                
+                // Find the most recent completed transaction
+                const completedTransaction = transactions.find(t => t.status === 'completed');
+                
+                if (completedTransaction) {
+                    // Get detailed receipt data
+                    const receiptResponse = await fetch(`/api/invoice/${completedTransaction.id}`);
+                    const receiptData = await receiptResponse.json();
+                    
+                    displayReceiptData(receiptData);
+                    document.getElementById('invoice-section').style.display = 'block';
+                } else {
+                    displayFallbackData();
+                }
+            } catch (error) {
+                console.error('Error loading receipt:', error);
+                displayFallbackData();
+            }
+        }
+        
+        function displayReceiptData(data) {
+            const receiptHtml = `
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-receipt text-primary me-3"></i>
+                        <div>
+                            <strong>Invoice #</strong>
+                            <div class="text-muted">${data.invoice_number}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-dollar-sign text-success me-3"></i>
+                        <div>
+                            <strong>Amount Paid</strong>
+                            <div class="text-muted">$${data.amount.toFixed(2)}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-user text-info me-3"></i>
+                        <div>
+                            <strong>Customer</strong>
+                            <div class="text-muted">${data.customer_name}</div>
+                            ${data.customer_email ? `<small class="text-muted">${data.customer_email}</small>` : ''}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-calendar text-warning me-3"></i>
+                        <div>
+                            <strong>Date</strong>
+                            <div class="text-muted">${data.invoice_date}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-check-circle text-success me-3"></i>
+                        <div>
+                            <strong>Status</strong>
+                            <div class="text-muted">
+                                <span class="badge bg-success">Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-box text-primary me-3"></i>
+                        <div>
+                            <strong>Product</strong>
+                            <div class="text-muted">${data.product_name}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('receipt-details').innerHTML = receiptHtml;
+            window.currentTransactionId = data.transaction_id;
+        }
+        
+        function displayFallbackData() {
+            const fallbackHtml = `
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-receipt text-primary me-3"></i>
+                        <div>
+                            <strong>Plan</strong>
+                            <div class="text-muted">Cerebra Premium</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-dollar-sign text-success me-3"></i>
+                        <div>
+                            <strong>Amount Paid</strong>
+                            <div class="text-muted">$5.00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-calendar text-info me-3"></i>
+                        <div>
+                            <strong>Date</strong>
+                            <div class="text-muted">Just now</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-check-circle text-success me-3"></i>
+                        <div>
+                            <strong>Status</strong>
+                            <div class="text-muted">
+                                <span class="badge bg-success">Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('receipt-details').innerHTML = fallbackHtml;
+        }
+        
+        function downloadInvoice() {
+            if (window.currentTransactionId) {
+                window.open(`/api/invoice/${window.currentTransactionId}/download`, '_blank');
+            } else {
+                alert('Invoice not available. Please try again in a moment.');
+            }
+        }
+        
+        // Start confetti animation and load receipt on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            createConfetti();
+            loadReceiptData();
+        });
+    </script>
+  </body>
+</html>
